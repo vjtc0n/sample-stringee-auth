@@ -37,4 +37,34 @@ app.get('/jwt/:userId', (req, res) => {
   });
 });
 
+app.get('/answer_url-from_internal/from/:userId1/to/:userId2/projectId=400', (req, res) => {
+  if (!req.params.userId1) {
+    return res.send({
+      error: 'No user ID 1 found!'
+    });
+  }
+  if (!req.params.userId2) {
+    return res.send({
+      error: 'No user ID 2 found!'
+    });
+  }
+
+  res.send([
+    {
+      action: 'connect',
+      from: {
+        type: 'internal',
+        number: req.params.userId1,
+        alias: 'user_1'
+      },
+      to: {
+        type: 'internal',
+        number: req.params.userId2,
+        alias: 'user_2'
+      },
+      customData: 'test-custom-data'
+    }
+  ]);
+});
+
 app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 3000!'));
