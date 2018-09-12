@@ -1,4 +1,6 @@
 const express = require('express');
+const config = require('./configuration.json');
+const TokenProvider = require('./token-provider');
 const app = express();
 
 const apiKeySid = 'SKqAqYNgdQwrcz32hCo1h0x3ClBkUMJlE';
@@ -81,6 +83,30 @@ app.get('/answer_url-from_internal', (req, res) => {
       customData: req.query.custom || ''
     }
   ]);
+});
+
+app.get('/chat-client-configuration.json', (req, res) => {
+  if (config.chatClient) {
+    res.json(config.chatClient);
+  } else {
+    res.json({});
+  }
+});
+
+app.get('/configuration', (req, res) => {
+  if (config) {
+    res.json(config);
+  } else {
+    res.json({});
+  }
+});
+
+app.get('/token', (req, res) => {
+  if (req.query.identity) {
+    res.send(TokenProvider.getToken(req.query.identity, req.query.pushChannel));
+  } else {
+    throw new Error('no `identity` query parameter is provided');
+  }
 });
 
 app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 3000!'));
