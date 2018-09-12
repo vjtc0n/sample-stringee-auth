@@ -25,6 +25,16 @@ function getAccessToken(userId) {
 }
 
 app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/test', (req, res) => {
+  const timeout = setTimeout(
+    () =>
+      res.send({
+        message: 'ok'
+      }),
+    10000
+  );
+  clearTimeout(timeout);
+});
 app.get('/jwt/:userId', (req, res) => {
   if (!req.params.userId) {
     return res.send({
@@ -37,15 +47,21 @@ app.get('/jwt/:userId', (req, res) => {
   });
 });
 
-app.get('/answer_url-from_internal/from/:userId1/to/:userId2/projectId=400', (req, res) => {
-  if (!req.params.userId1) {
+app.get('/answer_url-from_internal', (req, res) => {
+  if (!req.query.from) {
     return res.send({
-      error: 'No user ID 1 found!'
+      error: 'No user 1 found!'
     });
   }
-  if (!req.params.userId2) {
+  if (!req.query.to) {
     return res.send({
-      error: 'No user ID 2 found!'
+      error: 'No user 2 found!'
+    });
+  }
+
+  if (!req.query.userId) {
+    return res.send({
+      error: 'No user ID 1 found!'
     });
   }
 
@@ -54,15 +70,15 @@ app.get('/answer_url-from_internal/from/:userId1/to/:userId2/projectId=400', (re
       action: 'connect',
       from: {
         type: 'internal',
-        number: req.params.userId1,
+        number: req.query.from,
         alias: 'user_1'
       },
       to: {
         type: 'internal',
-        number: req.params.userId2,
+        number: req.query.to,
         alias: 'user_2'
       },
-      customData: 'test-custom-data'
+      customData: req.query.custom || ''
     }
   ]);
 });
