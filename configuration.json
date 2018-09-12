@@ -6,11 +6,11 @@
   },
   "tokenGenerator": {
     "accountSid": "ACa4865d243a0bbdb6c4cc26910cba0aac",
-    "signingKeySid": "SKa4df5259055e0fa1dfcb5f85b13e0e18",
-    "signingKeySecret": "47NiMQWzy7FB1entMVaxcyamaprbMFnR",
-    "serviceSid": "IS4d896b6a9a9547b7bbf562e7aa7cbeb7",
+    "signingKeySid": "SKa17f4dbc0b50478243e63c28c60f5972",
+    "signingKeySecret": "6fz6EY9qdLyrWEeuzthuon5ZJE8Gp9ag",
+    "serviceSid": "ISeca74bd8c73e4c30ae9c3be9150a41b0",
     "fcm": "CRca170cddc62ad3e3860cd07100014f03",
-    "apns": "CR2892a673ef4e8431b4bdb8749dd26549"
+    "apn": "CR2892a673ef4e8431b4bdb8749dd26549"
   },
   "ngrokSubdomain": "8bb0fef2"
 }
