@@ -7,9 +7,12 @@
     "start": "node ."
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "eslint-config-rallycoding": "^3.2.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.9",
+    "onesignal-node": "^2.0.1",
     "twilio": "^3.19.2"
   }
 }
