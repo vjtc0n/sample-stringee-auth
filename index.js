@@ -153,7 +153,6 @@ app.post('/room', (req, res) => {
 });
 
 app.post('/rooms', (req, res) => {
-  console.log(req.body);
   Room.find(
     {
       $or: [
@@ -167,7 +166,7 @@ app.post('/rooms', (req, res) => {
       if (error) {
         return res.send(error);
       }
-      rooms.sort((a, b) => (a.endTime < b.endTime ? -1 : a.endTime > b.endTime ? 1 : 0));
+      rooms.sort((a, b) => (a.endTime > b.endTime ? -1 : a.endTime < b.endTime ? 1 : 0));
       res.send({ rooms });
     }
   );
@@ -204,6 +203,7 @@ app.post('/join-chat', (req, res) => {
     {
       nameRoom: req.body.nameRoom
     },
+
     async (error, room) => {
       if (error) {
         return res.status(500).send('Lỗi Server');
@@ -219,8 +219,9 @@ app.post('/join-chat', (req, res) => {
 app.post('/end-chat', (req, res) => {
   Room.findOne(
     {
-      name: req.body.nameRoom
+      nameRoom: req.body.nameRoom
     },
+
     async (error, room) => {
       if (error) {
         return res.status(500).send('Lỗi Server');
