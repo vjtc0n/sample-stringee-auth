@@ -176,7 +176,8 @@ app.post('/chat', (req, res) => {
   const sentUser = req.body.userPhoneTo ? req.body.userPhoneTo : '243';
   const firstNotification = new OneSignal.Notification({
     contents: {
-      en: req.body.message
+      en: req.body.message,
+      tr: req.body.userPhoneFrom
     },
     filters: [{ field: 'tag', key: 'userPhone', relation: '=', value: sentUser }]
   });
