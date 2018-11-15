@@ -179,6 +179,9 @@ app.post('/chat', (req, res) => {
       en: req.body.message,
       tr: req.body.userPhoneFrom
     },
+    headings: {
+      en: req.body.userPhoneFrom
+    },
     filters: [{ field: 'tag', key: 'userPhone', relation: '=', value: sentUser }]
   });
 
